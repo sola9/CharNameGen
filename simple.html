@@ -36,20 +36,31 @@
             <br>
             <label for="yVowel">Use 'y' as a vowel</label>
             <input type="checkbox" id="yVowel" name="yVowel">
+            <br>
+            <input type="submit" id="genButton" name="genButton" value="Generate Names"onclick="generateNames()">
         </form>
-        <br>
-        <button onclick="generateNames()">Generate</button>
         <p id="namefield">null</p>
         
         <script>
             function generateNames(){
-                document.getElementById("namefield").innerHTML = randomName();
+                checkInputs();
+                //document.getElementById("namefield").innerHTML = randomName();
+                var generatedText = '';
+                for (let i = 0; i < document.getElementById("numNames").value; i++) {
+                    generatedText=generatedText.concat(randomName());
+                    generatedText=generatedText.concat("<br>");
+                }
+                document.getElementById("namefield").innerHTML = generatedText;
             }
+                                                       
             
             function randomName(){
                 let vowels = ['a','e','i','o','u'];
                 let consonants = ['b','c','d','f','g','h','j','k','l','m','n','p','q','r','s','t','v','w','x','y','z'];
                 var wasLastLetterVowel = new Boolean(false);
+                if(Math.random()*100>50){
+                    wasLastLetterVowel = true;
+                }
                 var name = '';
                 var j = Math.random() * 10 + 1;
                 
@@ -71,7 +82,12 @@
             }
             
             function checkInputs(){
-                
+                if(document.getElementById("numNames").value>100){
+                    document.getElementById("numNames").value = 100;
+                }
+                if(document.getElementById("numNames").value<1){
+                    document.getElementById("numNames").value = 1;
+                }
             }
         </script>
     </body>
