@@ -23,22 +23,21 @@
     <body>
         <p><a href="index.html">Back</a></p>
         <p>Simple name gen</p>
-        <form>
-            <br>
-            <label for="numNames">Number of names to generate:</label>
-            <input type="number" id="numNames" name="numNames">
-            <label for="numNames">Max: 100</label>
-            <br>
-            <label for="minLength">Minimum length:</label>
-            <input type="number" id="minLength" name="minLength">
-            <label for="maxLength">Maximum length:</label>
-            <input type="number" id="maxLength" name="maxLength">
-            <br>
-            <label for="yVowel">Use 'y' as a vowel</label>
-            <input type="checkbox" id="yVowel" name="yVowel">
-            <br>
-            <input type="submit" id="genButton" name="genButton" value="Generate Names"onclick="generateNames()">
-        </form>
+        <br>
+        <label for="numNames">Number of names to generate:</label>
+        <input type="number" id="numNames" name="numNames">
+        <label for="numNames">Max: 100</label>
+        <br>
+        <label for="minLength">Minimum length:</label>
+        <input type="number" id="minLength" name="minLength">
+        <label for="maxLength">Maximum length:</label>
+        <input type="number" id="maxLength" name="maxLength">
+        <br>
+        <label for="yVowel">Use 'y' as a vowel</label>
+        <input type="checkbox" id="yVowel" name="yVowel">
+        <br>
+        <!--<input type="submit" id="genButton" name="genButton" value="Generate Names"onclick="generateNames()">-->
+        <button onclick="generateNames()">Generate Names</button>
         <p id="namefield">null</p>
         
         <script>
