@@ -36,18 +36,19 @@
                 let consonants = ['b','c','d','f','g','h','j','k','l','m','n','p','q','r','s','t','v','w','x','y','z'];
                 var wasLastLetterVowel = new Boolean(false);
                 var name = '';
-                var j = Math.random * 10 + 1;
+                var j = Math.random() * 10 + 1;
+                
                 
                 for (let i = 0; i < j; i++) {
                     var nextLetter = '';
                     if (wasLastLetterVowel==true){
-                        nextLetter = vowels[Math.random*vowels.length];
-                        wasLastLetterVowel = true;
+                        nextLetter = vowels[Math.round((vowels.length-1)*Math.random())];
+                        wasLastLetterVowel = false;
                         name=name.concat(nextLetter);
                     } 
                     else {
-                        nextLetter = consonants[Math.random*consonants.length];
-                        wasLastLetterVowel = false;
+                        nextLetter = consonants[Math.round((consonants.length-1)*Math.random())];
+                        wasLastLetterVowel = true;
                         name=name.concat(nextLetter); 
                     }
                 }
