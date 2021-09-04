@@ -25,12 +25,12 @@
         <p>Simple name gen</p>
         <br>
         <label for="numNames">Number of names to generate:</label>
-        <input type="number" id="numNames" name="numNames">
+        <input type="number" id="numNames" name="numNames" value=5>
         <br>
         <label for="minLength">Minimum length:</label>
-        <input type="number" id="minLength" name="minLength">
+        <input type="number" id="minLength" name="minLength" value=2>
         <label for="maxLength">Maximum length:</label>
-        <input type="number" id="maxLength" name="maxLength">
+        <input type="number" id="maxLength" name="maxLength" value=10>
         <br>
         <label for="firstLetter">First letter:</label>
         <input type="text" id="firstLetter" name="firstLetter">
@@ -42,12 +42,11 @@
         <br>
         <!--<input type="submit" id="genButton" name="genButton" value="Generate Names"onclick="generateNames()">-->
         <button onclick="generateNames()">Generate Names</button>
-        <p id="namefield">null</p>
+        <p id="namefield"></p>
         
         <script>
             function generateNames(){
                 checkInputs();
-                //document.getElementById("namefield").innerHTML = randomName();
                 var generatedText = '';
                 for (let i = 0; i < document.getElementById("numNames").value; i++) {
                     generatedText=generatedText.concat(randomName());
@@ -65,10 +64,10 @@
                     wasLastLetterVowel = true;
                 }
                 var name = '';
-                var j = Math.random() * 10 + 1;
+                var j = Math.random() * (parseInt(document.getElementById("maxLength").value,10)-parseInt(document.getElementById("minLength").value,10)+1)+parseInt(document.getElementById("minLength").value,10)-1;
                 
                 
-                for (let i = 0; i < j; i++) {
+                for (let i = 0; i<j; i++) {
                     var nextLetter = '';
                     if (wasLastLetterVowel==true){
                         nextLetter = vowels[Math.round((vowels.length-1)*Math.random())];
@@ -90,6 +89,21 @@
                 }
                 if(document.getElementById("numNames").value<1){
                     document.getElementById("numNames").value = 1;
+                }
+                if(document.getElementById("maxLength").value<2){
+                    document.getElementById("maxLength").value = 2;
+                }
+                if(document.getElementById("maxLength").value>20){
+                    document.getElementById("maxLength").value = 20;
+                }
+                if(document.getElementById("minLength").value>20){
+                    document.getElementById("minLength").value = 20;
+                }
+                if(document.getElementById("minLength").value<2){
+                    document.getElementById("minLength").value = 2;
+                }
+                if(parseInt(document.getElementById("minLength").value,10)>parseInt(document.getElementById("maxLength").value,10)){
+                    document.getElementById("minLength").value = document.getElementById("maxLength").value;
                 }
             }
         </script>
