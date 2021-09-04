@@ -2,6 +2,9 @@
 
 <html lang="en">
     <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Open+Sans&family=Source+Serif+Pro&display=swap" rel="stylesheet"> 
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -16,14 +19,16 @@
         <link rel="icon" href="/favicon.svg" type="image/svg+xml">
         <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 
-        <!-- <link rel="stylesheet" href="css/styles.css?v=1.0"> --->
+        <link rel="stylesheet" href="style.css">
 
     </head>
 
     <body>
-        <p><a href="index.html">Back</a></p>
-        <p>Simple name gen</p>
-        <br>
+        <h1><a href="index.html" class = "headerLink">Character Name Generator</a></h1>
+        <h2 class="generatorBanner">Simple Name Generator</h2>
+        <p class="description">This generator alternates vowels and consonants to form a name.</p>
+        <h2 class="settingsTitle">Settings</h2>
+        <div class = "settings">
         <label for="numNames">Number of names to generate:</label>
         <input type="number" id="numNames" name="numNames" value=5>
         <br>
@@ -40,9 +45,10 @@
         <label for="yVowel">Use 'y' as a vowel</label>
         <input type="checkbox" id="yVowel" name="yVowel">
         <br>
-        <!--<input type="submit" id="genButton" name="genButton" value="Generate Names"onclick="generateNames()">-->
         <button onclick="generateNames()">Generate Names</button>
-        <p id="namefield"></p>
+        </div>
+        <p id="namefield" class="names"></p>
+        <div class="footer">Have suggestions? Found a bug? Want to see the source code? Check out the <a href="https://github.com/sola9/CharNameGen" class = "gitLink">github repo</a>.</div>
         
         <script>
             function generateNames(){
