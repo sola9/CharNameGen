@@ -63,12 +63,12 @@
                 if(document.getElementById("yVowel").checked){
                     vowels = ['a','e','i','o','u','y'];
                     consonants = ['b','c','d','f','g','h','j','k','l','m','n','p','q','r','s','t','v','w','x','z'];
-                    i = i+1;
+                    i = 1;
                 }
                 else {
                     vowels = ['a','e','i','o','u'];
                     consonants = ['b','c','d','f','g','h','j','k','l','m','n','p','q','r','s','t','v','w','x','y','z']; 
-                    i = i+1;
+                    i = 1;
                 }
                 var wasLastLetterVowel = new Boolean(false);
                 var name = '';
@@ -116,6 +116,7 @@
                         }
                     }
                 }
+                name=name.charAt(0).toUpperCase().concat(name.substr(1,name.length-1));
                 return name;
             }
             
