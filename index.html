@@ -2,6 +2,9 @@
 
 <html lang="en">
     <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Open+Sans&family=Source+Serif+Pro&display=swap" rel="stylesheet"> 
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -16,12 +19,17 @@
         <link rel="icon" href="/favicon.svg" type="image/svg+xml">
         <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 
-        <!-- <link rel="stylesheet" href="css/styles.css?v=1.0"> --->
+        <link rel="stylesheet" href="style.css">
 
     </head>
 
     <body>
-        <p>Character name generator. Generates random names for characters<br>Pick a generator.</p>
-        <p><a href="simple.html">simple name generator</a></p>
+        <h1><a href="index.html" class = "headerLink">Character Name Generator</a></h1>
+        <p class = "description">This a collection of character name generators. Most name generators just spit out some names from a list, but these generators string together random letters and syllables to form unique new names.<br>Pick a generator to use.</p>
+        <div class="generatorCard">
+            <h2><a href="simple.html">Simple Name Generator</a></h2>
+            <p class= "cardDesc">Generates names with an alternating consonant/vowel pattern.</p>
+        </div>
+        <div class="footer">Have suggestions? Found a bug? Want to see the source code? Check out the <a href="https://github.com/sola9/CharNameGen" class = "gitLink">github repo</a>.</div>
     </body>
 </html>
