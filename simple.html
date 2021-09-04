@@ -59,21 +59,21 @@
             function randomName(){
                 let vowels = ['a','e','i','o','u'];
                 let consonants = ['b','c','d','f','g','h','j','k','l','m','n','p','q','r','s','t','v','w','x','y','z']; 
+                let i = 0;
                 if(document.getElementById("yVowel").checked){
                     vowels = ['a','e','i','o','u','y'];
                     consonants = ['b','c','d','f','g','h','j','k','l','m','n','p','q','r','s','t','v','w','x','z'];
+                    i = i+1;
                 }
                 else {
                     vowels = ['a','e','i','o','u'];
                     consonants = ['b','c','d','f','g','h','j','k','l','m','n','p','q','r','s','t','v','w','x','y','z']; 
+                    i = i+1;
                 }
                 var wasLastLetterVowel = new Boolean(false);
-               /* if(Math.random()*100>50){
-                    wasLastLetterVowel = true;
-                }*/
                 var name = '';
                 if(document.getElementById("firstLetter").value != ''){
-                    name = document.getElementById("firstLetter").value;
+                    name = document.getElementById("firstLetter").value.toUpperCase();
                     if(vowels.includes(document.getElementById("firstLetter").value.toLowerCase())){
                         wasLastLetterVowel = true;
                     }
@@ -81,10 +81,10 @@
                        wasLastLetterVowel = false; 
                     }
                 }
+                
                 var j = Math.random() * (parseInt(document.getElementById("maxLength").value,10)-parseInt(document.getElementById("minLength").value,10)+1)+parseInt(document.getElementById("minLength").value,10)-1;
                 
-                
-                for (let i = 0; i<j; i++) {
+                for (i = i; i<j; i++) {
                     var nextLetter = '';
                     if (wasLastLetterVowel==false){
                         nextLetter = vowels[Math.round((vowels.length-1)*Math.random())];
@@ -95,6 +95,25 @@
                         nextLetter = consonants[Math.round((consonants.length-1)*Math.random())];
                         wasLastLetterVowel = false;
                         name=name.concat(nextLetter); 
+                    }
+                }
+                
+                if(document.getElementById("lastLetter").value != ''){
+                    if(vowels.includes(document.getElementById("lastLetter").value.toLowerCase())){
+                        if(vowels.includes(name.charAt(name.length-1).toLowerCase())){
+                            name = name.substr(0,name.length-1).concat(document.getElementById("lastLetter").value.toLowerCase());
+                        }
+                        else {
+                            name = name.concat(document.getElementById("lastLetter").value.toLowerCase());  
+                        }
+                    }
+                    if(consonants.includes(document.getElementById("lastLetter").value.toLowerCase())){
+                        if(consonants.includes(name.charAt(name.length-1).toLowerCase())){
+                            name = name.substr(0,name.length-1).concat(document.getElementById("lastLetter").value.toLowerCase());
+                        }
+                        else {
+                            name = name.concat(document.getElementById("lastLetter").value.toLowerCase());  
+                        }
                     }
                 }
                 return name;
