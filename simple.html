@@ -58,25 +58,42 @@
             
             function randomName(){
                 let vowels = ['a','e','i','o','u'];
-                let consonants = ['b','c','d','f','g','h','j','k','l','m','n','p','q','r','s','t','v','w','x','y','z'];
-                var wasLastLetterVowel = new Boolean(false);
-                if(Math.random()*100>50){
-                    wasLastLetterVowel = true;
+                let consonants = ['b','c','d','f','g','h','j','k','l','m','n','p','q','r','s','t','v','w','x','y','z']; 
+                if(document.getElementById("yVowel").checked){
+                    vowels = ['a','e','i','o','u','y'];
+                    consonants = ['b','c','d','f','g','h','j','k','l','m','n','p','q','r','s','t','v','w','x','z'];
                 }
+                else {
+                    vowels = ['a','e','i','o','u'];
+                    consonants = ['b','c','d','f','g','h','j','k','l','m','n','p','q','r','s','t','v','w','x','y','z']; 
+                }
+                var wasLastLetterVowel = new Boolean(false);
+               /* if(Math.random()*100>50){
+                    wasLastLetterVowel = true;
+                }*/
                 var name = '';
+                if(document.getElementById("firstLetter").value != ''){
+                    name = document.getElementById("firstLetter").value;
+                    if(vowels.includes(document.getElementById("firstLetter").value.toLowerCase())){
+                        wasLastLetterVowel = true;
+                    }
+                    else {
+                       wasLastLetterVowel = false; 
+                    }
+                }
                 var j = Math.random() * (parseInt(document.getElementById("maxLength").value,10)-parseInt(document.getElementById("minLength").value,10)+1)+parseInt(document.getElementById("minLength").value,10)-1;
                 
                 
                 for (let i = 0; i<j; i++) {
                     var nextLetter = '';
-                    if (wasLastLetterVowel==true){
+                    if (wasLastLetterVowel==false){
                         nextLetter = vowels[Math.round((vowels.length-1)*Math.random())];
-                        wasLastLetterVowel = false;
+                        wasLastLetterVowel = true;
                         name=name.concat(nextLetter);
                     } 
                     else {
                         nextLetter = consonants[Math.round((consonants.length-1)*Math.random())];
-                        wasLastLetterVowel = true;
+                        wasLastLetterVowel = false;
                         name=name.concat(nextLetter); 
                     }
                 }
@@ -84,8 +101,7 @@
             }
             
             function checkInputs(){
-                let vowels = ['a','e','i','o','u'];
-                let consonants = ['b','c','d','f','g','h','j','k','l','m','n','p','q','r','s','t','v','w','x','y','z'];
+                let letters = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z']
                 
                 if(document.getElementById("numNames").value>100){
                     document.getElementById("numNames").value = 100;
@@ -114,10 +130,10 @@
                 if(document.getElementById("lastLetter").value.length>1){
                     document.getElementById("lastLetter").value = document.getElementById("lastLetter").value.substring(0,1);
                 }
-                if(!vowels.includes(document.getElementById("firstLetter").value.toLowerCase())|| !consonants.includes(document.getElementById("firstLetter").value.toLowerCase())){
+                if(!letters.includes(document.getElementById("firstLetter").value.toLowerCase())){
                     document.getElementById("firstLetter").value = '';
                 }
-                if(!vowels.includes(document.getElementById("lastLetter").value.toLowerCase())|| !consonants.includes(document.getElementById("lastLetter").value.toLowerCase())){
+                if(!letters.includes(document.getElementById("lastLetter").value.toLowerCase())){
                     document.getElementById("lastLetter").value = '';
                 }
             }
