@@ -84,6 +84,9 @@
             }
             
             function checkInputs(){
+                let vowels = ['a','e','i','o','u'];
+                let consonants = ['b','c','d','f','g','h','j','k','l','m','n','p','q','r','s','t','v','w','x','y','z'];
+                
                 if(document.getElementById("numNames").value>100){
                     document.getElementById("numNames").value = 100;
                 }
@@ -104,6 +107,18 @@
                 }
                 if(parseInt(document.getElementById("minLength").value,10)>parseInt(document.getElementById("maxLength").value,10)){
                     document.getElementById("minLength").value = document.getElementById("maxLength").value;
+                }
+                if(document.getElementById("firstLetter").value.length>1){
+                    document.getElementById("firstLetter").value = document.getElementById("firstLetter").value.substring(0,1);
+                }
+                if(document.getElementById("lastLetter").value.length>1){
+                    document.getElementById("lastLetter").value = document.getElementById("lastLetter").value.substring(0,1);
+                }
+                if(!vowels.includes(document.getElementById("firstLetter").value.toLowerCase())|| !consonants.includes(document.getElementById("firstLetter").value.toLowerCase())){
+                    document.getElementById("firstLetter").value = '';
+                }
+                if(!vowels.includes(document.getElementById("lastLetter").value.toLowerCase())|| !consonants.includes(document.getElementById("lastLetter").value.toLowerCase())){
+                    document.getElementById("lastLetter").value = '';
                 }
             }
         </script>
