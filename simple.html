@@ -69,12 +69,10 @@
                 if(document.getElementById("yVowel").checked){
                     vowels = ['a','e','i','o','u','y'];
                     consonants = ['b','c','d','f','g','h','j','k','l','m','n','p','q','r','s','t','v','w','x','z'];
-                    i = 1;
                 }
                 else {
                     vowels = ['a','e','i','o','u'];
                     consonants = ['b','c','d','f','g','h','j','k','l','m','n','p','q','r','s','t','v','w','x','y','z']; 
-                    i = 1;
                 }
                 var wasLastLetterVowel = new Boolean(false);
                 var name = '';
@@ -82,13 +80,15 @@
                     name = document.getElementById("firstLetter").value.toUpperCase();
                     if(vowels.includes(document.getElementById("firstLetter").value.toLowerCase())){
                         wasLastLetterVowel = true;
+                        i = 1;
                     }
                     else {
-                       wasLastLetterVowel = false; 
+                        wasLastLetterVowel = false; 
+                        i = 1;
                     }
                 }
                 
-                var j = Math.random() * (parseInt(document.getElementById("maxLength").value,10)-parseInt(document.getElementById("minLength").value,10)+1)+parseInt(document.getElementById("minLength").value,10);
+                var j = Math.random() * (parseInt(document.getElementById("maxLength").value,10)-parseInt(document.getElementById("minLength").value,10))+parseInt(document.getElementById("minLength").value,10);
                 
                 for (i = i; i<j; i++) {
                     var nextLetter = '';
