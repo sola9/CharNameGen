@@ -88,7 +88,7 @@
                     }
                 }
                 
-                var j = Math.random() * (parseInt(document.getElementById("maxLength").value,10)-parseInt(document.getElementById("minLength").value,10))+parseInt(document.getElementById("minLength").value,10);
+                var j = Math.round(Math.random() * (parseInt(document.getElementById("maxLength").value,10)-parseInt(document.getElementById("minLength").value,10))+parseInt(document.getElementById("minLength").value,10));
                 
                 for (i = i; i<j; i++) {
                     var nextLetter = '';
