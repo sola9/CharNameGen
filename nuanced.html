@@ -1,0 +1,168 @@
+<!doctype html>
+
+<html lang="en">
+    <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Open+Sans&family=Source+Serif+Pro&display=swap" rel="stylesheet"> 
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <title>Nuanced Name Generator</title>
+        <meta name="description" content="A generator for character names.">
+
+        <meta property="title" content="Simple Name Generator">
+        <meta property="type" content="website">
+        <meta property="image" content="image.png">
+
+        <link rel="icon" href="/favicon.ico">
+        <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+        <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+        <link rel="stylesheet" href="style.css">
+
+    </head>
+
+    <body>
+        <h1><a href="index.html" class = "headerLink">Character Name Generator</a></h1>
+        <h2 class="generatorBanner">Nuanced Name Generator</h2>
+        <p class="description">This generator alternates segments of vowels and consonants to form a name. Most of the segments are one letter, but some segments are two-letter combinations common in English words.</p>
+        <h2 class="settingsTitle">Settings</h2>
+        <div class = "settings">
+        <label for="numNames">Number of names to generate:</label>
+        <input type="number" id="numNames" name="numNames" value=5>
+        <br>
+        <label for="minLength">Min segments:</label>
+        <input type="number" id="minLength" name="minLength" value=2>
+        <label for="maxLength">Max segments:</label>
+        <input type="number" id="maxLength" name="maxLength" value=10>
+        <br>
+        <label for="firstLetter">First letter:</label>
+        <input type="text" id="firstLetter" name="firstLetter">
+        <label for="lastLetter">Last letter:</label>
+        <input type="text" id="lastLetter" name="lastLetter">
+        <br>
+        <label for="yVowel">Use 'y' as a vowel</label>
+        <input type="checkbox" id="yVowel" name="yVowel">
+        <br>
+        <button onclick="generateNames()">Generate Names</button>
+        </div>
+        <p id="namefield" class="names"></p>
+        <div class="footer">Have suggestions? Found a bug? Want to see the source code? Check out the <a href="https://github.com/sola9/CharNameGen" class = "gitLink">github repo</a>.</div>
+        
+        <script>
+            function generateNames(){
+                checkInputs();
+                var generatedText = '';
+                for (let i = 0; i < document.getElementById("numNames").value; i++) {
+                    generatedText=generatedText.concat(randomName());
+                    generatedText=generatedText.concat("<br>");
+                }
+                document.getElementById("namefield").innerHTML = generatedText;
+            }
+                                                       
+            
+            function randomName(){
+                let vowels = ['a','e','i','o','u','ie','ae','ia','ou','ua','eo','au','ee','ue','ea','aa','oa','ei','au','a','e','i','o','u'];
+                let consonants = ['b','c','d','f','g','h','j','k','l','m','n','p','q','r','s','t','v','w','x','y','z','rt','tr','hn','nn','ch','nd','ll','th','rb','ph','ss','rl','st','tt','rg','rk','ld','sh','st','ff','ch','lt','gl','br']; 
+                let i = 0;
+                if(document.getElementById("yVowel").checked){
+                    vowels = ['a','e','i','o','u','y','ie','ae','ia','ou','ey','ua','eo','au','ee','ue','ay','ea','aa','oy','oa','ei','au','ya','a','e','i','o','u'];
+                    consonants = ['b','c','d','f','g','h','j','k','l','m','n','p','q','r','s','t','v','w','x','z','rt','tr','hn','nn','ch','nd','ll','th','rb','ph','ss','rl','st','tt','rg','rk','ld','sh','st','ff','ch','lt','gl','br'];
+                }
+                else {
+                    vowels = ['a','e','i','o','u','ie','ae','ia','ou','ua','eo','au','ee','ue','ea','aa','oa','ei','au','a','e','i','o','u'];
+                    consonants = ['b','c','d','f','g','h','j','k','l','m','n','p','q','r','s','t','v','w','x','y','z','rt','tr','hn','nn','ch','nd','ll','th','rb','ph','ss','rl','st','tt','rg','rk','ld','sh','st','ff','ch','lt','gl','br']; 
+                }
+                var wasLastLetterVowel = new Boolean(false);
+                var name = '';
+                if(document.getElementById("firstLetter").value != ''){
+                    name = document.getElementById("firstLetter").value.toUpperCase();
+                    if(vowels.includes(document.getElementById("firstLetter").value.toLowerCase())){
+                        wasLastLetterVowel = true;
+                        i = 1;
+                    }
+                    else {
+                        wasLastLetterVowel = false; 
+                        i = 1;
+                    }
+                }
+                
+                var j = Math.round(Math.random() * (parseInt(document.getElementById("maxLength").value,10)-parseInt(document.getElementById("minLength").value,10))+parseInt(document.getElementById("minLength").value,10));
+                
+                for (i = i; i<j; i++) {
+                    var nextLetter = '';
+                    if (wasLastLetterVowel==false){
+                        nextLetter = vowels[Math.round((vowels.length-1)*Math.random())];
+                        wasLastLetterVowel = true;
+                        name=name.concat(nextLetter);
+                    } 
+                    else {
+                        nextLetter = consonants[Math.round((consonants.length-1)*Math.random())];
+                        wasLastLetterVowel = false;
+                        name=name.concat(nextLetter); 
+                    }
+                }
+                
+                if(document.getElementById("lastLetter").value != ''){
+                    if(vowels.includes(document.getElementById("lastLetter").value.toLowerCase())){
+                        if(vowels.includes(name.charAt(name.length-1).toLowerCase())){
+                            name = name.substr(0,name.length-1).concat(document.getElementById("lastLetter").value.toLowerCase());
+                        }
+                        else {
+                            name = name.concat(document.getElementById("lastLetter").value.toLowerCase());  
+                        }
+                    }
+                    if(consonants.includes(document.getElementById("lastLetter").value.toLowerCase())){
+                        if(consonants.includes(name.charAt(name.length-1).toLowerCase())){
+                            name = name.substr(0,name.length-1).concat(document.getElementById("lastLetter").value.toLowerCase());
+                        }
+                        else {
+                            name = name.concat(document.getElementById("lastLetter").value.toLowerCase());  
+                        }
+                    }
+                }
+                name=name.charAt(0).toUpperCase().concat(name.substr(1,name.length-1));
+                return name;
+            }
+            
+            function checkInputs(){
+                let letters = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z']
+                
+                if(document.getElementById("numNames").value>100){
+                    document.getElementById("numNames").value = 100;
+                }
+                if(document.getElementById("numNames").value<1){
+                    document.getElementById("numNames").value = 1;
+                }
+                if(document.getElementById("maxLength").value<2){
+                    document.getElementById("maxLength").value = 2;
+                }
+                if(document.getElementById("maxLength").value>20){
+                    document.getElementById("maxLength").value = 20;
+                }
+                if(document.getElementById("minLength").value>20){
+                    document.getElementById("minLength").value = 20;
+                }
+                if(document.getElementById("minLength").value<2){
+                    document.getElementById("minLength").value = 2;
+                }
+                if(parseInt(document.getElementById("minLength").value,10)>parseInt(document.getElementById("maxLength").value,10)){
+                    document.getElementById("minLength").value = document.getElementById("maxLength").value;
+                }
+                if(document.getElementById("firstLetter").value.length>1){
+                    document.getElementById("firstLetter").value = document.getElementById("firstLetter").value.substring(0,1);
+                }
+                if(document.getElementById("lastLetter").value.length>1){
+                    document.getElementById("lastLetter").value = document.getElementById("lastLetter").value.substring(0,1);
+                }
+                if(!letters.includes(document.getElementById("firstLetter").value.toLowerCase())){
+                    document.getElementById("firstLetter").value = '';
+                }
+                if(!letters.includes(document.getElementById("lastLetter").value.toLowerCase())){
+                    document.getElementById("lastLetter").value = '';
+                }
+            }
+        </script>
+    </body>
+</html>
